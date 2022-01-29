@@ -10,12 +10,14 @@ function App() {
           </a>
         </nav>
         <header>
-          <h1>Game design katas to improve your skills!</h1>
+          <h1 className="main-title">
+            Game design katas to improve your skills
+          </h1>
         </header>
         <main>
           <p>
             <button className="shuffle-button">
-              <span className="shuffle-text">Show me</span>
+              <span className="shuffle-text">Show me!</span>
               <span>&#xa0;&#8594;</span>
             </button>
           </p>

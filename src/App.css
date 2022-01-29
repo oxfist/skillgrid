@@ -11,6 +11,11 @@
   justify-content: center;
 }
 
+.main-title {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .main-container header {
   font-size: 1.6rem;
 }
@@ -23,7 +28,10 @@
 }
 
 .shuffle-text {
-  text-decoration: underline;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding-bottom: 0.1rem;
+  letter-spacing: 0.05rem;
 }
 
 nav {

@@ -3,7 +3,7 @@ import App from "./App";
 
 describe("home page", () => {
   it("renders welcome message", () => {
-    const expectedWelcomeMessage = /Game design katas to improve your skills!/i;
+    const expectedWelcomeMessage = /Game design katas to improve your skills/i;
 
     render(<App />);
     const title = screen.getByText(expectedWelcomeMessage);
@@ -12,7 +12,7 @@ describe("home page", () => {
   });
 
   it("renders show me link", () => {
-    const expectedLink = /Show me/i;
+    const expectedLink = /Show me!/i;
 
     render(<App />);
     const title = screen.getByRole("button", expectedLink);
