@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="main-container">
+        <nav>
+          <a href="/" className="skillgrid">
+            <em>skillgrid</em>
+          </a>
+        </nav>
+        <header>
+          <h1>Game design katas to improve your skills!</h1>
+        </header>
+        <main>
+          <p>
+            <button className="shuffle-button">
+              <span className="shuffle-text">Show me</span>
+              <span>&#xa0;&#8594;</span>
+            </button>
+          </p>
+        </main>
+      </div>
     </div>
   );
 }
