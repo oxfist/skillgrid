@@ -1,4 +1,4 @@
-name: test
+name: Run tests
 
 on: [push]
 
@@ -13,3 +13,13 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run test:nowatch
+
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          build: npm run build
+          start: npm start
+          browser: firefox

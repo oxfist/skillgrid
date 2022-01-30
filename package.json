@@ -17,7 +17,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:nowatch": "react-scripts test --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -38,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^9.3.1",
     "netlify-cli": "8.15.0"
   }
 }
