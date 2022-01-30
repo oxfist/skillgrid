@@ -1,0 +1,87 @@
+name: e2e tests (Cypress)
+
+on: [push]
+
+jobs:
+  install-cypress:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+
+      - name: Install Cypress
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+          build: npm run build
+
+  chrome-ui-tests:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: install-cypress
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v2
+
+      - name: "Chrome - UI Tests"
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          start: npm start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: "UI - Chrome"
+          spec: cypress/integration/*
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  firefox-ui-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.13.0-chrome95-ff94
+      options: --user 1001
+    needs: install-cypress
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v2
+
+      - name: "Firefox - UI Tests"
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          start: npm start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: firefox
+          record: true
+          parallel: true
+          group: "UI - Firefox"
+          spec: cypress/integration/*
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
