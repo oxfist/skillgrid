@@ -9,18 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install Cypress
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+          build: npm run build
+
       - name: Save build folder
         uses: actions/upload-artifact@v2
         with:
           name: build
           if-no-files-found: error
           path: build
-
-      - name: Install Cypress
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
-          build: npm run build
 
   chrome-ui-tests:
     runs-on: ubuntu-latest
