@@ -25,6 +25,7 @@ jobs:
           path: build
 
   firefox-ui-tests:
+    needs: install-cypress
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
