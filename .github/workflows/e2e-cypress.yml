@@ -27,7 +27,7 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           record: true
-          group: "UI - Firefox"
+          group: "UI - Chrome"
           spec: cypress/integration/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
