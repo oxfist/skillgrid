@@ -21,8 +21,8 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: firefox
-          install: false
           build: npm run build
+          start: npm start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           record: true
