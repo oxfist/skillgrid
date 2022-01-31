@@ -1,6 +1,9 @@
 name: Unit tests (Jest)
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - "renovate/**"
 
 jobs:
   unit-tests:
