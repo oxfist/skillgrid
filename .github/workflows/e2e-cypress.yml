@@ -27,7 +27,6 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           record: true
-          parallel: true
           group: "UI - Firefox"
           spec: cypress/integration/*
         env:
@@ -56,7 +55,6 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           record: true
-          parallel: true
           group: "UI - Firefox"
           spec: cypress/integration/*
         env:
