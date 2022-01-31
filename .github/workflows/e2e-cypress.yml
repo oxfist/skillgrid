@@ -1,6 +1,9 @@
 name: e2e tests (Cypress)
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - "renovate/**"
 
 jobs:
   install-cypress:
@@ -35,6 +38,9 @@ jobs:
 
       - name: Download the build folders
         uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
 
       - name: "Chrome - UI Tests"
         uses: cypress-io/github-action@v2
@@ -68,6 +74,9 @@ jobs:
 
       - name: Download the build folders
         uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
 
       - name: "Firefox - UI Tests"
         uses: cypress-io/github-action@v2
