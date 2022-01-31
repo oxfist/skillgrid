@@ -45,11 +45,11 @@ jobs:
       - name: "Chrome - UI Tests"
         uses: cypress-io/github-action@v2
         with:
+          browser: chrome
           install: false
-          start: npm start
+          build: npm run build
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
-          browser: chrome
           record: true
           parallel: true
           group: "UI - Chrome"
@@ -81,11 +81,11 @@ jobs:
       - name: "Firefox - UI Tests"
         uses: cypress-io/github-action@v2
         with:
+          browser: firefox
           install: false
-          start: npm start
+          build: npm run build
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
-          browser: firefox
           record: true
           parallel: true
           group: "UI - Firefox"
