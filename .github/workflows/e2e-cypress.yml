@@ -6,26 +6,7 @@ on:
       - "renovate/**"
 
 jobs:
-  install-cypress:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install Cypress
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
-          build: npm run build
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          if-no-files-found: error
-          path: build
-
-  firefox-ui-tests:
-    needs: install-cypress
+  chrome-ui-tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -34,17 +15,43 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Download the build folders
-        uses: actions/download-artifact@v2
+      - name: Cypress Info
+        run: npx cypress info
+
+      - name: "Chrome - UI Tests"
+        uses: cypress-io/github-action@v2
         with:
-          name: build
-          path: build
+          browser: chrome
+          build: npm run build
+          start: npm start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          record: true
+          parallel: true
+          group: "UI - Firefox"
+          spec: cypress/integration/*
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  firefox-ui-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cypress Info
+        run: npx cypress info
 
       - name: "Firefox - UI Tests"
         uses: cypress-io/github-action@v2
         with:
           browser: firefox
-          install: false
+          build: npm run build
           start: npm start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
