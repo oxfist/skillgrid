@@ -1,4 +1,4 @@
-const _ = require("lodash");
+import uniqueRandomArray from "unique-random-array";
 
 const GENRES = [
   "Open-world game",
@@ -56,8 +56,11 @@ Object.freeze(GENRES);
 Object.freeze(CLIENTS);
 
 function generate() {
-  const randomGenre = _.sample(GENRES);
-  const randomClient = _.sample(CLIENTS);
+  const getRandomGenre = uniqueRandomArray(GENRES);
+  const getRandomClient = uniqueRandomArray(CLIENTS);
+
+  const randomGenre = getRandomGenre();
+  const randomClient = getRandomClient();
 
   return [randomGenre, randomClient];
 }
