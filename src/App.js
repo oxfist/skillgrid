@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useSpring, animated } from "react-spring";
 
+import useBoop from "./hooks/useBoop";
 import { generate } from "./lib/kataGenerator";
 
 import "./App.css";
@@ -7,6 +9,15 @@ import "./App.css";
 function App() {
   const [isStart, setIsStart] = useState(true);
   const [kata, setKata] = useState("");
+  const [style, trigger] = useBoop({ x: isStart ? 5 : 0 });
+  const animationProps = useSpring({
+    to: { opacity: 1, y: 0 },
+    from: { opacity: 0, y: 50 },
+    config: {
+      tension: 300,
+      friction: 15,
+    },
+  });
 
   function randomizeKata() {
     if (isStart) {
@@ -25,17 +36,19 @@ function App() {
           </a>
         </nav>
         <header>
-          <h1 className="main-title">
-            {isStart ? "Game design katas to improve your skills" : kata}
-          </h1>
+          <animated.h1 style={animationProps} className="main-title">
+            {isStart ? "Game Design Katas to Improve Your Skills" : kata}
+          </animated.h1>
         </header>
         <main>
-          <p>
+          <p onMouseEnter={trigger}>
             <button className="shuffle-button" onClick={randomizeKata}>
               <span className="shuffle-text">
-                {isStart ? "Show me!" : "New kata"}
+                {isStart ? "Show Me!" : "New Kata"}
               </span>
-              <span>&#xa0;{isStart ? "→" : "↺"}</span>
+              <animated.span style={style}>
+                &#xa0;{isStart ? "→" : "↺"}
+              </animated.span>
             </button>
           </p>
         </main>

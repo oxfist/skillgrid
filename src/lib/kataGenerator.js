@@ -19,6 +19,7 @@ const GENRES = [
   "Grand strategy game",
   "Visual novel",
   "Walking simulator",
+  "Cooking game",
 ];
 
 const CLIENTS = [

@@ -31,7 +31,7 @@
   border-bottom-style: solid;
   border-bottom-width: 1px;
   padding-bottom: 0.1rem;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.02rem;
 }
 
 nav {
@@ -43,5 +43,5 @@ nav {
 .skillgrid {
   text-decoration: none;
   color: black;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
