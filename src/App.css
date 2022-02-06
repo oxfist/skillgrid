@@ -17,19 +17,20 @@
 }
 
 .main-container header {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 
 .shuffle-button {
   border: none;
   background-color: inherit;
+  color: inherit;
   cursor: pointer;
   font-size: 1.6rem;
 }
 
 .shuffle-text {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  display: inline-block;
+  border-bottom: 2px solid;
   padding-bottom: 0.1rem;
   letter-spacing: 0.02rem;
 }
