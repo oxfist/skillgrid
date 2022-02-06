@@ -31,6 +31,7 @@ function useBoop({
       return;
     }
 
+    // Always cancel animation after timing duration
     const timeoutId = window.setTimeout(() => {
       setIsBooped(false);
     }, timing);

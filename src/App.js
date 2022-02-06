@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSpring, animated } from "react-spring";
 
 import useBoop from "./hooks/useBoop";
@@ -9,13 +9,13 @@ import "./App.css";
 function App() {
   const [isStart, setIsStart] = useState(true);
   const [kata, setKata] = useState("");
-  const [style, trigger] = useBoop({ x: isStart ? 5 : 0 });
-  const animationProps = useSpring({
+  const [style, triggerBoop] = useBoop({ x: isStart ? 5 : 0 });
+  const headerAnimationProps = useSpring({
     to: { opacity: 1, y: 0 },
-    from: { opacity: 0, y: 50 },
+    from: { opacity: 0, y: 60 },
     config: {
       tension: 300,
-      friction: 15,
+      friction: 20,
     },
   });
 
@@ -27,6 +27,22 @@ function App() {
     setKata(newKata);
   }
 
+  useEffect(() => {
+    let intervalId;
+    const timeoutId = window.setTimeout(() => {
+      triggerBoop();
+
+      intervalId = window.setInterval(() => {
+        triggerBoop();
+      }, 5000);
+    }, 2000);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearInterval(intervalId);
+    };
+  }, [triggerBoop]);
+
   return (
     <div className="App">
       <div className="main-container">
@@ -36,19 +52,24 @@ function App() {
           </a>
         </nav>
         <header>
-          <animated.h1 style={animationProps} className="main-title">
+          <animated.h1 style={headerAnimationProps} className="main-title">
             {isStart ? "Game Design Katas to Improve Your Skills" : kata}
           </animated.h1>
         </header>
         <main>
-          <p onMouseEnter={trigger}>
+          <p>
             <button className="shuffle-button" onClick={randomizeKata}>
-              <span className="shuffle-text">
-                {isStart ? "Show Me!" : "New Kata"}
-              </span>
-              <animated.span style={style}>
-                &#xa0;{isStart ? "→" : "↺"}
-              </animated.span>
+              {isStart ? (
+                <>
+                  <span className="shuffle-text">Show Me!</span>
+                  <animated.span style={style}>&#xa0;{"→"}</animated.span>
+                </>
+              ) : (
+                <>
+                  <span className="shuffle-text">New Kata</span>
+                  <span>&#xa0;{"↺"}</span>
+                </>
+              )}
             </button>
           </p>
         </main>
