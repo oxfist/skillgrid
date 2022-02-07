@@ -30,7 +30,7 @@
 
 .shuffle-text {
   display: inline-block;
-  border-bottom: 2px solid;
+  border-bottom: 1px solid;
   padding-bottom: 0.1rem;
   letter-spacing: 0.02rem;
 }
