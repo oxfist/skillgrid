@@ -50,7 +50,7 @@
   "devDependencies": {
     "cypress": "9.5.0",
     "eslint-plugin-cypress": "2.12.1",
-    "netlify-cli": "9.6.5"
+    "netlify-cli": "9.12.5"
   },
   "jest": {
     "transformIgnorePatterns": [
