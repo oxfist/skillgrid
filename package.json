@@ -48,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "9.5.1",
+    "cypress": "12.16.0",
     "eslint-plugin-cypress": "2.12.1",
     "netlify-cli": "9.12.5"
   },
